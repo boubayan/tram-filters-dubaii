@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>فلاتر ترام دبي</title>
+  <style>
+    :root {
+      --bg-color: #f8f8f8;
+      --text-color: #222;
+      --box-color: #fff;
+      --border-color: #ccc;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --box-color: #1e1e1e;
+      --border-color: #444;
+    }
+
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      color: red;
+      border-bottom: 2px solid red;
+      display: inline-block;
+      padding-bottom: 10px;
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    select, button, input[type="password"] {
+      padding: 12px;
+      margin: 10px auto;
+      font-size: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      width: 90%;
+      max-width: 400px;
+      background-color: var(--box-color);
+      color: var(--text-color);
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .info-box {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: var(--box-color);
+      border: 1px solid var(--border-color);
+      max-width: 600px;
+      margin-inline: auto;
+      border-radius: 8px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: gray;
+    }
+
+    .dark-toggle {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 20px;
+      }
+      select, button, input[type="password"] {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-toggle">
+    <button onclick="toggleDarkMode()">🌓</button>
+  </div>
+
+  <!-- Login Section -->
+  <div id="loginSection">
+    <h1>فلاتر ترام دبي</h1>
+    <p>تصميم تجريبي - برمجة علي محمد العمري</p>
+    <h2>الرجاء إدخال الرقم السري</h2>
+    <input type="password" id="passwordInput" placeholder="كلمة المرور">
+    <br>
+    <button onclick="checkPassword()">دخول</button>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainSection" style="display: none;">
+    <h1>فلاتر قطاع الترام</h1>
+    <select id="filterSelect" onchange="showInfo()">
+      <option value="">-- اختر الفلتر --</option>
+      <option value="1">فلتر 1-2-3</option>
+      <option value="2">فلتر 4</option>
+      <option value="3">فلتر 5</option>
+      <option value="4">فلتر 7</option>
+      <option value="5">فلتر 8</option>
+      <option value="6">فلتر 9-10</option>
+      <option value="7">فلتر 11</option>
+      <option value="8">فلتر 12</option>
+      <option value="9">فلتر 13</option>
+      <option value="10">فلتر 14</option>
+      <option value="11">فلتر 15</option>
+    </select>
+
+    <div class="info-box" id="infoBox" style="display: none;">
+      <h3 id="filterTitle"></h3>
+      <p id="filterLocation"></p>
+      <a id="mapLink" href="#" target="_blank">
+        <button>عرض الموقع على Google Maps</button>
+      </a>
+    </div>
+
+    <div class="footer">إصدار تجريبي - برمجة علي محمد العمري</div>
+  </div>
+
+  <script>
+    const password = "tram123";
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === password) {
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("mainSection").style.display = "block";
+      } else {
+        alert("كلمة المرور غير صحيحة!");
+      }
+    }
+
+    const filterData = {
+      1: {
+        title: "فلتر 1-2-3",
+        location: "الموقع: الحي السكني شارع عبدالله عمران تريم شارع اصفري",
+        link: "https://maps.app.goo.gl/qySt8NPXryUWFK3a9?g_st=com.google.maps.preview.copy"
+      },
+      2: {
+        title: "فلتر 4",
+        location: "شارع الملك سلمان بن عبدالعزيز ال سعود ، بالقرب من كلية دبي الخاصة",
+        link: "https://maps.app.goo.gl/gXJq96hBmuyQcAYm7?g_st=com.google.maps.preview.copy"
+      },
+      3: {
+        title: "فلتر 5",
+        location: "شارع الملك سلمان بن عبدالعزيز ال سعود ، سكن الطيارين",
+        link: ""
+      },
+      4: {
+        title: "فلتر 7",
+        location: "شارع الملك سلمان بن عبدالعزيز ال سعود ، قرية المعرفة",
+        link: "https://maps.app.goo.gl/wvVPP78EVn1DGnA67?g_st=com.google.maps.preview.copy"
+      },
+      5: {
+        title: "فلتر 8",
+        location: "شارع الملك سلمان بن عبدالعزيز ال سعود ، مدخل جزيرة النخلة",
+        link: "https://maps.app.goo.gl/1jV4M7XnXBcJs6x26?g_st=com.google.maps.preview.copy"
+      },
+      6: {
+        title: "فلتر 9-10",
+        location: "بالقرب من طريق نخلة جميرا",
+        link: "https://maps.app.goo.gl/yE4qu4V6SmRjxpTV8?g_st=com.google.maps.preview.copy"
+      },
+      7: {
+        title: "فلتر 11",
+        location: "شارع النجوم ، بالقرب من مدينة دبي للإعلام",
+        link: "https://maps.app.goo.gl/8hRMhqXu318CS11a6?g_st=com.google.maps.preview.copy"
+      },
+      8: {
+        title: "فلتر 12",
+        location: "بالقرب من محطة ترام الميناء السياحي ، ومجمع كارفور هابير ماركت",
+        link: "https://maps.app.goo.gl/ocQHrXZ1EMrHFWSC8?g_st=com.google.maps.preview.copy"
+      },
+      9: {
+        title: "فلتر 13",
+        location: "بالقرب من برنسس تاور ومقابل مسجد الشيخ راشد",
+        link: "https://maps.app.goo.gl/hMKyXpcuJtUtVNuz9?g_st=com.google.maps.preview.copy"
+      },
+      10: {
+        title: "فلتر 14",
+        location: "شارع السايورة ، شارع المرسى مقابل شارع الشيخ زايد",
+        link: "https://maps.app.goo.gl/3bmBg7iZLu81EYFc8?g_st=com.google.maps.preview.copy"
+      },
+      11: {
+        title: "فلتر 15",
+        location: "شارع المرسى ، مقابل دبي مارينا مول و ميلينويم",
+        link: "https://maps.app.goo.gl/xFnbBiuumyD4rksM8?g_st=com.google.maps.preview.copy"
+      }
+    };
+
+    function showInfo() {
+      const selected = document.getElementById("filterSelect").value;
+      const box = document.getElementById("infoBox");
+      if (filterData[selected]) {
+        document.getElementById("filterTitle").textContent = filterData[selected].title;
+        document.getElementById("filterLocation").textContent = filterData[selected].location;
+        const link = document.getElementById("mapLink");
+        if (filterData[selected].link) {
+          link.href = filterData[selected].link;
+          link.style.display = "inline-block";
+        } else {
+          link.style.display = "none";
+        }
+        box.style.display = "block";
+      } else {
+        box.style.display = "none";
+      }
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+
+</body>
+</html>
